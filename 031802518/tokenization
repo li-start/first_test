@@ -8,7 +8,7 @@ def tokenization(self, input_file):
     words = pseg.cut(input_file.read())
     # stop_flag:去除标点符号，stopwords:去除停用词
     self.stop_flag=set(['c', 'd', 'f', 'm', 'p', 'r', 't', 'u', 'uj', 'x'])
-    self.stopwords=open('./data/stop_words.txt','r',encoding="UTF-8").read()
+    self.stopwords=open('./stop_words.txt','r',encoding="UTF-8").read()
     for word, flag in words:
         if flag not in self.stop_flag and word not in self.stopwords:
             result.append(word)
