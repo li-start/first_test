@@ -6,7 +6,7 @@
  
  运行
 ======
-  在release文件夹中找到main.py，按照以下方式运行
+  在main.py文件中，按照以下方式运行
   > #python -py main.py [原文文件][抄袭的文件][答案文件],如下例：
   
   > python -py main.py orig.txt orig_0.8_add.txt ans.txt
