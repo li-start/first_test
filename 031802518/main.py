@@ -20,7 +20,7 @@ def tokenization(orig,orig_sim):
     # print('s1_cut:',s1_cut)
     # print('s2_cut:',s2_cut)
     word_set = set(orig_cut).union(set(orig_sim_cut))
-    
+
     # print('word_set',word_set)#s1_cut是s1的分词表，s1_cut是s2的分词表，word_set是这两个表的集合，可以把这两个表中重合的删掉
     return word_set,orig_cut,orig_sim_cut
 #import dict
@@ -57,11 +57,11 @@ def sim_ans(orig_cut_code,orig_sim_cut_code):
         side1 += pow(orig_cut_code[i], 2)
         side2+= pow(orig_sim_cut_code[i], 2)
     try:
-        result = round(float(sum) / (math.sqrt(side1) * math.sqrt(side2)), 2)
+        result = float(sum) / (math.sqrt(side1) * math.sqrt(side2))
     except ZeroDivisionError:
         result = 0.0
         print("这是一个空文本或者两个文本毫无相关，查重率为：",result)
-    print("余弦相似度为：%.2f" % result)
+    print("余弦相似度为：%.2f"%result)
     return result
 def write_ans(result):
     ans_txt = open("./ans.txt", 'w', encoding="UTF-8")
@@ -69,21 +69,14 @@ def write_ans(result):
     ans_txt.write(sim)
     ans_txt.close()
 if __name__=='__main__':
-    doc1=open(sys.argv[1],'r',encoding="UTF-8")
+    doc1=open('./data/1.txt','r',encoding="UTF-8")
     doc1_txt=doc1.read()
     doc1.close()
-    doc2=open(sys.argv[2],'r',encoding="UTF-8")
+    doc2=open('./data/33.txt','r',encoding="UTF-8")
     doc2_txt=doc2.read()
     doc2.close()
     word_set,doc1_cut,doc2_cut=tokenization(doc1_txt,doc2_txt)
     doc1_cut_code,doc2_cut_code=dictionary(word_set,doc1_cut,doc2_cut)
     sim=sim_ans(doc1_cut_code,doc2_cut_code)
     write_ans(sim)
-    '''
-    s1 = open(sys.argv[1], mode='r', encoding="UTF-8").read()
-    s2 = open(sys.argv[2], mode='r', encoding="UTF-8").read()
-    word_set,s1_cut,s2_cut=tokenization(s1,s2)
-    s1_cut_code,s2_cut_code=dictionary(word_set,s1_cut,s2_cut)
-    result=sim_ans(s1_cut_code,s2_cut_code)
-    write_ans(result)
-    '''
+   
