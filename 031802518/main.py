@@ -69,14 +69,14 @@ def write_ans(result):
     ans_txt.write(sim)
     ans_txt.close()
 if __name__=='__main__':
-    doc1=open('./data/1.txt','r',encoding="UTF-8")
+    doc1=open(sys.argv[1],'r',encoding="UTF-8")
     doc1_txt=doc1.read()
     doc1.close()
-    doc2=open('./data/33.txt','r',encoding="UTF-8")
+    doc2=open(sys.argv[2],'r',encoding="UTF-8")
     doc2_txt=doc2.read()
     doc2.close()
     word_set,doc1_cut,doc2_cut=tokenization(doc1_txt,doc2_txt)
     doc1_cut_code,doc2_cut_code=dictionary(word_set,doc1_cut,doc2_cut)
     sim=sim_ans(doc1_cut_code,doc2_cut_code)
     write_ans(sim)
-   
+
